@@ -4,8 +4,7 @@
 typedef struct
 {
 	char nome[50];
-	float potencia;
-	float tempo;	
+	float potencia, tempo;		
 }teletros;
 
 int qtd = 0;
@@ -17,7 +16,7 @@ void salvaArquivo(teletros el[])
 	int i = 0;
 	arq = fopen("dadosEletro.txt", "wb");
 	fwrite(&el[i], sizeof(teletros), qtd, arq);
-	printf("Dados salvos com sucesso.\n");
+	printf("Dados salvados com sucesso.\n");
 	fclose(arq);
 
 }
@@ -28,7 +27,7 @@ void carregaArquivo(teletros el[])
 	FILE *arq;
 	arq = fopen("dadosEletro.txt", "rb");
 	if(arq == NULL){
-		printf("Arquivo de alunos nao encontrado!\n");
+		printf("Arquivo do aluno nao encontrado!\n");
 		return;
 	}
 	while(fread(&el[qtd], sizeof(teletros), 1, arq) > 0)
@@ -43,12 +42,10 @@ void addEletro(teletros el[])
 	printf("Nome do eletrodomestico: ");
 	fflush(stdin);
 	gets(el[qtd].nome);
-	
 	printf("Potencia do eletro(em kW): ");
 	fflush(stdin);
 	scanf("%f", &el[qtd].potencia);
-
-	printf("Tempo de uso diario(em horas): ");
+	printf("Tempo de uso diario (em horas):");
 	fflush(stdin);
 	scanf("%f", &el[qtd].tempo);
 	
@@ -63,8 +60,8 @@ void listaEletros(teletros el[])
 	{
 		printf("*** Eletro %d ***\n", i + 1);
 		printf("Nome: %s\n", el[i].nome);
-		printf("Potencia(kW): %.2f\n", el[i].potencia);
-		printf("Uso diario(horas): %.2f\n", el[i].tempo);
+		printf("Potencia(kW): %.2f\n",el[i].potencia);
+		printf("Uso diario(horas):%.2f\n", el[i].tempo);
 		printf("------------------------\n");
 	}
 	
@@ -99,7 +96,6 @@ int filtraCons(teletros el[], float gasto)
 {
 	int res = 1;
 	float custo;
-	
 	for(int i = 0; i < qtd; i++)
 	{
 		custo = el[i].potencia * el[i].tempo;
@@ -122,18 +118,16 @@ void consumoTotal(teletros el[])
 {
 	float preco = 0.0;
 	float consumo = 0.0;
-	
 	for(int i = 0; i < qtd; i++)
 	{
 		preco += el[i].potencia * el[i].tempo;
 		consumo += el[i].potencia;
 	}
-	
 	printf("Consumo diario: %.2fkW\n", consumo);
 	printf("Consumo mensal: %.2fkW\n", consumo * 30.0);
 	printf("\n");
-	printf("Custo diario: R$%.2f\n", preco);
-	printf("Custo mensal: R$%.2f\n", preco * 30.0);
+	printf("Custo diario: R$%.2f\n",preco);
+	printf("Custo mensal: R$%.2f\n",preco * 30.0);
 	
 }
 //--------------------------------------------
@@ -143,13 +137,13 @@ int menu()
 	int opcao;
 	
 	printf("*** Sistema de energia ***\n");
-	printf("1 - Cadastrar eletrodomestico\n");
-	printf("2 - Listar eletrodomesticos\n");
-	printf("3 - Procurar por nome\n");
-	printf("4 - Procurar por gasto\n");
+	printf("1 - Cadastrar Eletrodomestico\n");
+	printf("2 - Listar Eletrodomesticos\n");
+	printf("3 - Procurar por Nome\n");
+	printf("4 - Procurar por Gasto\n");
 	printf("5 - Calcular gasto diario e mensal\n");
-	printf("6 - Salvar dados\n");
-	printf("7 - Carregar dados\n");
+	printf("6 - Salvar Dados\n");
+	printf("7 - Carregar Dados\n");
 	printf("0 - Sair\n");
 	printf("Opcao: ");
 	scanf("%d", &opcao);
