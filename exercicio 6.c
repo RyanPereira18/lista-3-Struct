@@ -3,15 +3,13 @@
 
 typedef struct
 {
-	int mes;
-	int ano;
+	int mes, ano;
+	
 }tnasc;
 
 typedef struct
 {
-	int cod;
-	int leite;
-	int alim;
+	int cod, leite, alim;
 	tnasc nasc;
 	char abate;
 }tgado;
@@ -26,7 +24,7 @@ void salvaArquivo(tgado gd[])
 	int i = 0;
 	arq = fopen("dadosGado.txt", "wb");
 	fwrite(&gd[i], sizeof(tgado), qtd, arq);
-	printf("Dados salvos com sucesso.\n");
+	printf("Dados salvados com sucesso.\n");
 	fclose(arq);
 
 }
@@ -37,7 +35,7 @@ void carregaArquivo(tgado gd[])
 	FILE *arq;
 	arq = fopen("dadosGado.txt", "rb");
 	if(arq == NULL){
-		printf("Arquivo de alunos nao encontrado!\n");
+		printf("Arquivo do aluno nao encontrado!\n");
 		return;
 	}
 	while(fread(&gd[qtd], sizeof(tgado), 1, arq) > 0)
@@ -51,20 +49,16 @@ void addGado(tgado gd[], int mes, int ano){
 	printf("Codigo da cabeca de gado: ");
 	fflush(stdin);
 	scanf("%d", &gd[qtd].cod);
-	
 	printf("Litros de leite p/ semana(em litros): ");
 	fflush(stdin);
 	scanf("%d", &gd[qtd].leite);
-	
 	printf("Alimentos ingeridos p/ semana(em quilos): ");
 	fflush(stdin);
 	scanf("%d", &gd[qtd].alim);
-	
-	printf("Mes de Nascimento: ");
+	printf("Mes do Nascimento: ");
 	fflush(stdin);
 	scanf("%d", &gd[qtd].nasc.mes);
-	
-	printf("Ano de Nascimento: ");
+	printf("Ano do Nascimento: ");
 	fflush(stdin);
 	scanf("%d", &gd[qtd].nasc.ano);
 	
@@ -107,7 +101,7 @@ void calculaLeite(tgado gd[])
 		totalLeite += gd[i].leite;
 	}
 	
-	printf("Total de leite produzido na semana: %d", totalLeite);
+	printf("Total de leites produzidos na semana: %d", totalLeite);
 	
 }
 //--------------------------------------------
@@ -121,7 +115,7 @@ void calculaAlim(tgado gd[])
 		totalAlim += gd[i].alim;
 	}
 	
-	printf("Total de alimento consumido na semana: %d", totalAlim);
+	printf("Total de alimentos consumidos na semana: %d", totalAlim);
 	
 }
 //--------------------------------------------
@@ -149,16 +143,16 @@ int menu()
 {
 	int opcao;
 	
-	printf("*** Controle de gado ***\n");
+	printf("*** Controle de Gado ***\n");
 	printf("1 - Cadastrar cabeca de gado\n");
 	printf("2 - Listar cabeca de gado\n");
-	printf("3 - Calcular leite produzido\n");
-	printf("4 - Calcular alimento consumido\n");
+	printf("3 - Calcular leites produzidos\n");
+	printf("4 - Calcular alimentos consumidos\n");
 	printf("5 - Listar animais aptos para o abate\n");
-	printf("6 - Salvar dados\n");
-	printf("7 - Carregar dados\n");
+	printf("6 - Salvar Dados\n");
+	printf("7 - Carregar Dados\n");
 	printf("0 - Sair\n");
-	printf("Opcao: ");
+	printf("Opcao:");
 	scanf("%d", &opcao);
 	printf("\n");
 	return opcao;
@@ -176,7 +170,7 @@ int main()
 		switch(op)
 		{
 			case 1:
-				printf("Por favor, insira mes e ano de compra do gado: ");
+				printf("Insira mes e ano de compra do gado: ");
 				scanf("%d%d", &mes, &ano);
 				printf("\n");
 				addGado(gado, mes, ano);
