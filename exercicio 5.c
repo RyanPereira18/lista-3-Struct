@@ -3,17 +3,15 @@
 
 typedef struct
 {
-	char nomePessoa[30];
-	char data[20];
-	char emprestado;
+	char nomePessoa[30], data[20], emprestados;
+	
 }tdata;
 
 typedef struct
 {
 	char titulo[30];
 	char console[15];
-	int ano;
-	int ranking;
+	int ano, ranking;
 	tdata emprestimo;
 }tjogo;
 
@@ -24,20 +22,16 @@ int qtd = 0;
 void addJogo(tjogo jg[]){
 	printf("Titulo do jogo: ");
 	fflush(stdin);
-	gets(jg[qtd].titulo);
-	
+	gets(jg[qtd].titulo);	
 	printf("Console: ");
 	fflush(stdin);
-	gets(jg[qtd].console);
-	
+	gets(jg[qtd].console);	
 	printf("Ano de lancamento: ");
 	fflush(stdin);
-	scanf("%d", &jg[qtd].ano);
-	
+	scanf("%d", &jg[qtd].ano);	
 	printf("Ranking: ");
 	fflush(stdin);
-	scanf("%d", &jg[qtd].ranking);
-	
+	scanf("%d", &jg[qtd].ranking);	
 	jg[qtd].emprestimo.emprestado = 'N';
 	
 	qtd++;
@@ -51,7 +45,7 @@ void listaJogos(tjogo jg[])
 		printf("*** Jogo %d ***\n", i + 1);
 		printf("Titulo: %s\n", jg[i].titulo);
 		printf("Console: %s\n", jg[i].console);
-		printf("Ano de publicacao: %d\n", jg[i].ano);
+		printf("Ano da publicacao: %d\n", jg[i].ano);
 		printf("Ranking: %d\n", jg[i].ranking);
 		printf("Emprestado: %c\n", jg[i].emprestimo.emprestado);
 		printf("------------------------\n");
@@ -63,12 +57,10 @@ void fazEmprestimo(tjogo jg[], int cod)
 {
 	printf("Nome da pessoa: ");
 	fflush(stdin);
-	gets(jg[cod - 1].emprestimo.nomePessoa);
-	
+	gets(jg[cod - 1].emprestimo.nomePessoa);	
 	printf("Data do emprestimo: ");
 	fflush(stdin);
-	gets(jg[cod - 1].emprestimo.data);
-	
+	gets(jg[cod - 1].emprestimo.data);	
 	jg[cod - 1].emprestimo.emprestado = 'S';	
 }
 //--------------------------------------------
@@ -86,7 +78,7 @@ int filtraTitulo(tjogo jg[], char titulo[30])
 			printf("*** Jogo %d ***\n", i + 1);
 			printf("Titulo: %s\n", jg[i].titulo);
 			printf("Console: %s\n", jg[i].console);
-			printf("Ano de publicacao: %d\n", jg[i].ano);
+			printf("Ano da publicacao: %d\n", jg[i].ano);
 			printf("Ranking: %d\n", jg[i].ranking);
 			printf("Emprestado: %c\n", jg[i].emprestimo.emprestado);
 			printf("------------------------\n");
@@ -111,7 +103,7 @@ int filtraConsole(tjogo jg[], char console[15])
 			printf("*** Jogo %d ***\n", i + 1);
 			printf("Titulo: %s\n", jg[i].titulo);
 			printf("Console: %s\n", jg[i].console);
-			printf("Ano de publicacao: %d\n", jg[i].ano);
+			printf("Ano da publicacao: %d\n", jg[i].ano);
 			printf("Ranking: %.2f\n", jg[i].ranking);
 			printf("Emprestado: %c\n", jg[i].emprestimo.emprestado);
 			printf("------------------------\n");
@@ -126,8 +118,7 @@ int filtraConsole(tjogo jg[], char console[15])
 
 int listaEmp(tjogo jg[])
 {
-	int res = -1;
-	
+	int res = -1;	
 	for(int i = 0; i < qtd; i++){
 		if(jg[i].emprestimo.emprestado == 'S')
 		{
@@ -209,7 +200,7 @@ void main(){
 				res = listaEmp(jogos);
 				if(res == -1)
 				{
-					printf("Nao ha jogos emprestados!");
+				    printf("Nao ha jogos emprestados!");
 				}
 				break;
 			case 0:
