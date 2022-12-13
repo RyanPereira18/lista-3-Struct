@@ -2,9 +2,9 @@
 #include <string.h>
 
 typedef struct
-{
-	char nome[100];
-	int matricula, prova1, prova2, prova3, media;
+{  
+    char nome[100];
+    int matricula, prova1, prova2, prova3, media;
 }talunos;
 
 int qtd = 0;
@@ -16,7 +16,7 @@ void salvaArquivo(talunos al[])
 	int i = 0;
 	arq = fopen("dadosAlunos.txt", "wb");
 	fwrite(&al[i], sizeof(talunos), qtd, arq);
-	printf("Dados salvos com sucesso.\n");
+	printf("Dados salvados com sucesso.\n");
 	fclose(arq);
 }
 //--------------------------------------------
@@ -26,7 +26,7 @@ void carregaArquivo(talunos al[])
 	FILE *arq;
 	arq = fopen("dadosAlunos.txt", "rb");
 	if(arq == NULL){
-		printf("Arquivo de alunos nao encontrado!\n");
+		printf("Arquivo de aluno nao encontrado!\n");
 		return;
 	}
 	while(fread(&al[qtd], sizeof(talunos), 1, arq) > 0)
@@ -39,26 +39,21 @@ void carregaArquivo(talunos al[])
 
 void addAluno(talunos al[])
 {
-	printf("Nome do aluno: ");
+	printf("Nome do aluno:");
 	fflush(stdin);
 	gets(al[qtd].nome);
-	
-	printf("Matricula do aluno: ");
+        printf("Matricula do aluno: ");
 	fflush(stdin);
 	scanf("%d", &al[qtd].matricula);
-
 	printf("Nota da primeira prova: ");
 	fflush(stdin);
 	scanf("%d", &al[qtd].prova1);
-	
 	printf("Nota da segunda prova: ");
 	fflush(stdin);
 	scanf("%d", &al[qtd].prova2);
-	
 	printf("Nota da primeira prova: ");
 	fflush(stdin);
 	scanf("%d", &al[qtd].prova3);
-	
 	al[qtd].media = (al[qtd].prova1 + al[qtd].prova2 + al[qtd].prova3) / 3;
 	
 	qtd++;
