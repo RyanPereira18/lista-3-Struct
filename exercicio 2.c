@@ -4,8 +4,8 @@
 typedef struct{
 	char titulo[30];
 	char autor[15];
-	int ano;
-	int prateleira;
+	int ano, prateleira;
+	 
 }tlivro;
 
 int qtd = 0;
@@ -26,7 +26,7 @@ void carregaArquivo(tlivro liv[]){
 	FILE *arq;
 	arq = fopen("dadosLivros.txt", "rb");
 	if(arq == NULL){
-		printf("Arquivo de livros nao encontrado!\n");
+		printf("Arquivo dos livros nao encontrado!\n");
 		return;
 	}
 	while(fread(&liv[qtd], sizeof(tlivro), 1, arq) > 0)
@@ -37,11 +37,11 @@ void carregaArquivo(tlivro liv[]){
 //--------------------------------------------
 void addLivro(tlivro liv[])
 {
-	printf("Titulo do livro: ");
+	printf("Titulo do livro:");
 	fflush(stdin);
 	gets(liv[qtd].titulo);
 	
-	printf("Nome do autor: ");
+	printf("Nome do autor:");
 	fflush(stdin);
 	gets(liv[qtd].autor);
 	
@@ -51,8 +51,7 @@ void addLivro(tlivro liv[])
 	
 	printf("Prateleira:");
 	fflush(stdin);
-	scanf("%d", &liv[qtd].prateleira);
-	
+	scanf("%d", &liv[qtd].prateleira);	
 	qtd++;
 }
 //--------------------------------------------
@@ -76,8 +75,7 @@ void listaLivros(tlivro liv[])
 int filtraTitulo(tlivro liv[], char tituloConsulta[30])
 {
 	char tituloAux[40];
-	int res = -1;
-	
+	int res = -1;	
 	for(int i = 0; i < qtd; i++)
 	{
 		strcpy(tituloAux, liv[i].titulo); // copiando do vetor para aux
@@ -86,8 +84,8 @@ int filtraTitulo(tlivro liv[], char tituloConsulta[30])
 		{
 			printf("*** Livro %d ***\n", i + 1);
 			printf("Titulo: %s\n", liv[i].titulo);
-			printf("Nome do autor: %s\n", liv[i].autor);
-			printf("Ano de publicacao: %d\n", liv[i].ano);
+			printf("Nome do autor(a): %s\n", liv[i].autor);
+			printf("Ano da publicacao: %d\n", liv[i].ano);
 			printf("Prateleira: %d\n", liv[i].prateleira);
 			printf("------------------------\n");
 			res = 0;
@@ -162,7 +160,7 @@ int main()
 				res = filtraTitulo(livros, tituloBusca);
 				if(res == -1)
 				{
-					printf("Livro nao encontrado!");
+				   printf("Livro nao encontrado!");
 				}
 				break;
 			case 4:
@@ -171,7 +169,7 @@ int main()
 				res = filtraAno(livros, busca);
 				if(res == -1)
 				{
-					printf("Nao ha livros publicados a partior desse ano!");
+			           printf("Nao ha livros publicados a partior desse ano!");
 				}
 				break;
 			case 0:
